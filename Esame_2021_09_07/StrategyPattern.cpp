@@ -7,9 +7,9 @@
 #include <fstream>
 #include <iomanip>
 
-#define V0X  15.0   //[m/s]
-#define V0Y  15.0   //[m/s[
-#define M    25.0   //[kg[
+#define V0_X  15.0   //[m/s]
+#define V0_Y  15.0   //[m/s]
+#define M    25.0   //[kg]
 #define BETA 0.15   //[N*s/m]
 #define G    9.81   //[m/S]
 
@@ -18,18 +18,17 @@ using namespace std;
 int main() {
 
   double dt=0.001;
-  double h=0.001;
-  Velocity v0(V0X,V0Y);
-  v0.print();
+  Velocity v0(V0_X,V0_Y);
 
   Analytical analytical(v0,BETA,M,G,dt);
-  RungeKutta rungekutta(v0,BETA,M,G,h);
+  RungeKutta rungekutta(v0,BETA,M,G,dt);
 
   double tmin=0.;
   double tmax=1.5;
 
   vector<Velocity> v_an;
   vector<Velocity> v_rk;
+  
   v_an=analytical.velocity(tmin,tmax);
   v_rk=rungekutta.velocity(tmin,tmax);
 
@@ -41,7 +40,7 @@ int main() {
   for(vector<Velocity>::const_iterator it=v_an.begin(); it != v_an.end(); ++it) {
     ofile1 << setprecision(5) << fixed;
     ofile1 << it->vx() <<"\t" << it->vy() <<"\t" << t << endl;
-    t+=h;
+    t+=dt;
   }
 
   ofile1.close();
@@ -54,7 +53,7 @@ int main() {
   for(vector<Velocity>::const_iterator it=v_rk.begin(); it != v_rk.end(); ++it) {
     ofile2 << setprecision(5) << fixed;
     ofile2 << it->vx() << "\t" << it->vy() << "\t" << t << endl;
-    t+=h;
+    t+=dt;
   }
 
   ofile2.close();

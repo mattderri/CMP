@@ -30,7 +30,7 @@ class SpeedCalculator{
   virtual void set_m(double m) {m_=m;}
   virtual void set_g(double g) {g_=g;}
 
-  virtual vector<Velocity> velocity(double tmin,double tmax) const = 0;
+  virtual vector<Velocity> velocity(double tmin,double tmax) const=0;
 
 
   private:

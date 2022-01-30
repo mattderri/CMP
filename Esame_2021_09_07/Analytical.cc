@@ -14,16 +14,16 @@ Analytical::Analytical(Velocity v0,double beta,double m,double g,double dt) : Sp
 vector<Velocity> Analytical::velocity(double tmin,double tmax) const{
   vector<Velocity> v;
 
-  double newvx=0.;
-  double newvy=0.;
+  double v_x=0.;
+  double v_y=0.;
   
   for(double t=tmin;t<tmax;t+=dt_){
 
 		
-    newvx=v0().vx()*exp(-beta()*t/m());
-    newvy=v0().vy()*exp(-beta()*t/m())-m()*g()/beta()*(1-exp(-beta()*t/m()));
+    v_x=v0().vx()*exp(-beta()*t/m());
+    v_y=v0().vy()*exp(-beta()*t/m())-m()*g()/beta()*(1-exp(-beta()*t/m()));
 		
-    v.push_back(Velocity(newvx,newvy));
+    v.push_back(Velocity(v_x,v_y));
   }
 
   return v;

@@ -11,12 +11,12 @@ using std::vector;
 class RungeKutta : public SpeedCalculator{
   
 public:
-  RungeKutta(Velocity v0,double beta,double m,double g,double h);
+  RungeKutta(Velocity v0,double beta,double m,double g,double dt);
   ~RungeKutta() {}
 
   virtual vector<Velocity> velocity(double tmin,double tmax) const;
 
 private:
-  double h_;
+  double dt_;
 };
 #endif
