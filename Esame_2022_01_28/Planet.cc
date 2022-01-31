@@ -20,6 +20,7 @@ void Planet::set_R(double R) {R_=R;}
 
 //Utility
 void Planet::print(){
-  cout << "Massa del pianeta: " << M_ << " kg" << endl;
-  cout << "Raggio del pianeta: " << R_ << " km" << endl;
+  cout << "PIANETA" << endl;
+  cout << "Massa: " << M_ << " kg" << endl;
+  cout << "Raggio: " << R_ << " km" << endl;
 }

@@ -1,0 +1,50 @@
+#ifndef SATELLITE_HH
+#define SATELITE_HH
+
+#include "Velocity.h"
+#include <vector>
+
+using std::vector;
+
+class Satellite{
+
+ public:
+
+  //Constructors
+  Satellite(double m,double x, double y,double z,Velocity v,double A){
+    m_=m;
+    x_=x;
+    y_=y;
+    z_=z;
+    v_=v;
+    A_=A;
+}
+
+  //Getters
+  virtual double m() const {return m_;}
+  virtual double x() const {return x_;}
+  virtual double y() const {return y_;}
+  virtual double z() const {return z_;}
+  virtual Velocity v() const {return v_;}
+  virtual double A() const {return A_;}
+
+  //Setters
+  virtual void set_m(double m) {m_=m;}
+  virtual void set_x(double x) {x_=x;}
+  virtual void set_y(double y) {y_=y;}
+  virtual void set_z(double z) {z_=z;}
+  virtual void set_v(Velocity v) {v_=v;}
+  virtual void set_A(double m) {A_=A;}
+
+  //virtual vector<Velocity> velocity(double tmin,double tmax) const=0;
+
+
+  private:
+  double m_;
+  double x_;
+  double y_;
+  double z_;
+  Velocity v_;
+  double A_;
+};
+#endif

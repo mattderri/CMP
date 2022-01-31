@@ -24,6 +24,7 @@ void Atmosphere::set_A_p(double A_p) {A_p_=A_p;}
 
 //Utility
 void Atmosphere::print(){
+  cout << "ATMOSFERA" << endl;
   cout << "Altitudine: " << h_ << " km" << endl;
   cout << "Flusso solare: " << F_ << " SFU" <<endl;
   cout << "Indice geomagnetico: " << A_p_ << endl;

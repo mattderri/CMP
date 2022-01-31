@@ -1,48 +1,50 @@
-#ifndef SATELLITE_HH
-#define SATELLITE_HH
+#ifndef SATELLITE1_HH
+#define SATELLITE1_HH
+
+#include "Velocity.h"
+#include "Vector3D.h"
+#include <vector>
+#include <iostream>
+
+using std::vector;
+using namespace std;
 
 class Satellite{
 
  public:
   
   //Constructors
-  Satellite() {
-    m_=0;
-    x_=0;
-    y_=0;
-    z_=0;
-    vx_=0;
-    vy_=0;
-    vz_=0;
-    A_=0;
+  Satellite(double m,Vector3D r,Velocity v,double A) {
+    m_=m;
+    r_=r;
+    v_=v;
+    A_=A;
   }
-  Satellite(double m,double x,double y,double z,double vx,double vy,double vz,double A);
+  //Satellite(double m,double x,double y,double z,Velocity v,double A);
 
   //Destructors
   ~Satellite() {}
 
   //Getters
-  double m() const;
-  double x() const;
-  double y() const;
-  double z() const;
-  double vx() const;
-  double vy() const;
-  double vz() const;
-  double A() const;
+  virtual double m() const {return m_;}
+  virtual Vector3D r() const {return r_;}
+  virtual Velocity v() const {return v_;}
+  virtual double A() const {return A_;}
 
   //Setters
-  void set_m(double m);
-  void set_x(double x);
-  void set_y(double y);
-  void set_z(double z);
-  void set_vx(double vx);
-  void set_vy(double vy);
-  void set_vz(double vz);
-  void set_A(double A);
+  virtual void set_m(double m) {m_=m;}
+  virtual void set_r(Vector3D r) {r_=r;}
+  virtual void set_v (Velocity v) {v_=v;}
+  virtual void set_A(double A) {A_=A;}
   
   //Utility
-  void print();
+  void print(){
+    cout << "SATELLITE" << endl;
+    cout << "Massa: " << m_ << " kg" << endl;
+    cout << "Area della sezione trasversa: " << A_ << " m^2"<<endl;
+    v_.print();
+    r_.print();
+  };
 
   //Operators
   //Velocity operator+(const Velocity& rhs) const;
@@ -50,12 +52,8 @@ class Satellite{
 
  private:
   double m_;
-  double x_;
-  double y_;
-  double z_;
-  double vx_;
-  double vy_;
-  double vz_;
+  Vector3D r_;
+  Velocity v_;
   double A_;
 
 };
