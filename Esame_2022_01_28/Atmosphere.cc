@@ -1,0 +1,50 @@
+#include "Atmosphere.h"
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+//Constructors
+Atmosphere::Atmosphere(double h,double F,double A_p) {
+  h_=h;
+  F_=F;
+  A_p_=A_p;
+}
+
+//Getters
+double Atmosphere::h() const {return h_;}
+double Atmosphere::F() const {return F_;}
+double Atmosphere::A_p() const {return A_p_;}
+
+//Setters
+void Atmosphere::set_h(double h) {h_=h;}
+void Atmosphere::set_F(double F) {F_=F;}
+void Atmosphere::set_A_p(double A_p) {A_p_=A_p;}
+
+//Utility
+void Atmosphere::print(){
+  cout << "Altitudine: " << h_ << " km" << endl;
+  cout << "Flusso solare: " << F_ << " SFU" <<endl;
+  cout << "Indice geomagnetico: " << A_p_ << endl;
+}
+
+double Atmosphere::mu(double h){
+  double mu=27-0.012*(h-200);
+  return mu;
+}
+
+double Atmosphere::T(double F,double A_p){
+  double T=900+2.5*(F-70)+1.5*A_p;
+  return T;
+}
+
+double Atmosphere::rho(double h,double mu,double T){
+  double rho=6e-10*exp(-((h-175)*mu)/(T));
+  return rho;
+}
+
+double Atmosphere::D(double rho,double v,double A,double C_d){
+  double D=-0.5*rho*v*v*A*C_d;
+  return D;
+}

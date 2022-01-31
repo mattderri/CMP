@@ -14,8 +14,9 @@ class Satellite{
     vx_=0;
     vy_=0;
     vz_=0;
+    A_=0;
   }
-  Satellite(double m,double x,double y,double z,double vx,double vy,double vz);
+  Satellite(double m,double x,double y,double z,double vx,double vy,double vz,double A);
 
   //Destructors
   ~Satellite() {}
@@ -28,6 +29,7 @@ class Satellite{
   double vx() const;
   double vy() const;
   double vz() const;
+  double A() const;
 
   //Setters
   void set_m(double m);
@@ -37,6 +39,7 @@ class Satellite{
   void set_vx(double vx);
   void set_vy(double vy);
   void set_vz(double vz);
+  void set_A(double A);
   
   //Utility
   void print();
@@ -53,6 +56,7 @@ class Satellite{
   double vx_;
   double vy_;
   double vz_;
+  double A_;
 
 };
 #endif
