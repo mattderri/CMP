@@ -3,16 +3,18 @@
 
 #include "Velocity.h"
 #include "Vector3D.h"
+#include <vector>
+#include <iostream>
+#include <cmath>
+
+using std::vector;
+using namespace std;
 
 class Satellite{
 
  public:
   
   //Constructors
-  Satellite(){
-    m_=0;
-    A_=0;
-  }
   Satellite(double m,Vector3D r,Velocity v,double A);
 
   //Destructors

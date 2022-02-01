@@ -1,50 +1,57 @@
-#ifndef SATELLITE_HH
-#define SATELITE_HH
+#ifndef SATELLITE1_HH
+#define SATELLITE1_HH
 
 #include "Velocity.h"
+#include "Vector3D.h"
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 using std::vector;
+using namespace std;
 
-class Satellite{
+class Satellite1{
 
  public:
-
+  
   //Constructors
-  Satellite(double m,double x, double y,double z,Velocity v,double A){
-    m_=m;
-    x_=x;
-    y_=y;
-    z_=z;
+  Satellite1() {
+    m_=0;
+    r_=r;
     v_=v;
-    A_=A;
-}
+    A_=0;
+  }
+  Satellite1(double m,Vector3D r,Velocity v,double A);
+
+  //Destructors
+  ~Satellite1() {}
 
   //Getters
-  virtual double m() const {return m_;}
-  virtual double x() const {return x_;}
-  virtual double y() const {return y_;}
-  virtual double z() const {return z_;}
-  virtual Velocity v() const {return v_;}
-  virtual double A() const {return A_;}
+  virtual double m() const; 
+  virtual Vector3D r() const;
+  virtual Velocity v() const;
+  virtual double A() const;
 
   //Setters
-  virtual void set_m(double m) {m_=m;}
-  virtual void set_x(double x) {x_=x;}
-  virtual void set_y(double y) {y_=y;}
-  virtual void set_z(double z) {z_=z;}
-  virtual void set_v(Velocity v) {v_=v;}
-  virtual void set_A(double m) {A_=A;}
+  virtual void set_m(double m); 
+  virtual void set_r(Vector3D r); 
+  virtual void set_v (Velocity v);
+  virtual void set_A(double A);
+  
+  //Utility
+  double v2(double vx,double vy,double vz);
 
-  //virtual vector<Velocity> velocity(double tmin,double tmax) const=0;
+  double r2(double x,double y,double z);
 
+  double h(double x,double y,double z);
 
-  private:
+  void print();
+  
+ private:
   double m_;
-  double x_;
-  double y_;
-  double z_;
+  Vector3D r_;
   Velocity v_;
   double A_;
+
 };
 #endif

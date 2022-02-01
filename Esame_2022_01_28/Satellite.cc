@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 
-using std::vector;
 using namespace std;
 
 //Constructors

@@ -3,21 +3,22 @@
 
 #include "Satellite.h"
 #include "FlySatellite.h"
+#include "Velocity.h"
 
 #include <vector>
 
-using stad::vector;
+using std::vector;
 
-class RUngeKutta:public FlySatellite{
+class RungeKutta:public FlySatellite{
 
  public:
-  RungeKutta(Satellite sat,Atmosphere atm,Planet planet,dt);
+  RungeKutta(Satellite sat,Atmosphere atm,Planet planet,double dt);
   ~RungeKutta() {}
 
-  virtual vector<Satellite> satellite(double tmin,double tmax) const;
+  virtual vector<Velocity> satellite(double tmin,double tmax) const;
 
  private:
-  double dt_
+  double dt_;
     };
 #endif
   

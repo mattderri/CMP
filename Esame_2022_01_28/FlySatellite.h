@@ -5,6 +5,7 @@
 #include "Vector3D.h"
 #include "Satellite.h"
 #include "Atmosphere.h"
+#include "Planet.h"
 #include <vector>
 
 using std::vector;
@@ -31,7 +32,7 @@ class FlySatellite{
   virtual void set_atm(Atmosphere atm) {atm_=atm;}
   virtual void set_planet(Planet planet) {planet_=planet;}
 
-  virtual vector<Satellite> satellite(double tmin, souble tmax) const=0;
+  virtual vector<Velocity> satellite(double tmin, double tmax) const=0;
 
  private:
   Satellite sat_;
