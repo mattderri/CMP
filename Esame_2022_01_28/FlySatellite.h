@@ -32,7 +32,7 @@ class FlySatellite{
   virtual void set_atm(Atmosphere atm) {atm_=atm;}
   virtual void set_planet(Planet planet) {planet_=planet;}
 
-  virtual vector<Velocity> satellite(double tmin, double tmax) const=0;
+  virtual vector<Satellite> simulation(double tmin, double tmax) const=0;
 
  private:
   Satellite sat_;

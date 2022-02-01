@@ -15,7 +15,7 @@ class RungeKutta:public FlySatellite{
   RungeKutta(Satellite sat,Atmosphere atm,Planet planet,double dt);
   ~RungeKutta() {}
 
-  virtual vector<Velocity> satellite(double tmin,double tmax) const;
+  virtual vector<Satellite> simulation(double tmin,double tmax) const;
 
  private:
   double dt_;

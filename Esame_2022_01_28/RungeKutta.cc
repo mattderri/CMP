@@ -1,4 +1,7 @@
 #include "RungeKutta.h"
+#include "Satellite.h"
+#include "Velocity.h"
+#include "Vector3D.h"
 
 #define G 6.67e-11
 #define C_d 2
@@ -13,10 +16,11 @@ RungeKutta::RungeKutta(Satellite sat,Atmosphere atm, Planet planet,double dt):Fl
   dt_=dt;
 }
 								    
-vector<Velocity> RungeKutta::satellite(double tmin,double tmax) const{
-  Satellite sat1;
-  vector<Vector3D> r1;
-  vector<Velocity> v;
+vector<Satellite> RungeKutta::simulation(double tmin,double tmax) const{
+
+  vector<Satellite> s;
+  Velocity v;
+  Vector3D r;
 
   double k1x=0;
   double k2x=0;
@@ -49,7 +53,13 @@ vector<Velocity> RungeKutta::satellite(double tmin,double tmax) const{
     double mu=atm().mu(h);
     double rho=atm().rho(h,mu,T);
 
-    v.push_back(Velocity(vx,vy,vz));
+    v.set_vx(vx);
+    v.set_vy(vy);
+    v.set_vz(vz);
+    r.set_x(x);
+    r.set_y(y);
+    r.set_z(z);
+    s.push_back(Satellite(sat().m(),r,v,sat().A()));
     
     k1x=(-G*planet().M()*x/(pow(sat().r2(x+R,y+R,z+R),1.5))+atm().D(rho,sat().v2(vx,vy,vz),sat().A(),C_d))*dt_;
     k1y=(-G*planet().M()*y/(pow(sat().r2(x+R,y+R,z+R),1.5))+atm().D(rho,sat().v2(vx,vy,vz),sat().A(),C_d))*dt_;
@@ -68,12 +78,12 @@ vector<Velocity> RungeKutta::satellite(double tmin,double tmax) const{
     vz+=k2z;
 
     x+=h1x;
-    z+=h1y;
-    y+=h1z;
+    y+=h1y;
+    z+=h1z;
     
   }
 
-  return v;
+  return s;
 
 }
   

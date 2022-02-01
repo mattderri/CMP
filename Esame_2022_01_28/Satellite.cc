@@ -18,8 +18,14 @@ Satellite::Satellite(double m,Vector3D r,Velocity v,double A) {
 //Getters
 double Satellite::m() const {return m_;}
 Vector3D Satellite::r() const {return r_;}
+double Satellite::x() const {return r_.x();}
+double Satellite::y() const {return r_.y();}
+double Satellite::z() const {return r_.z();}
 Velocity Satellite::v() const {return v_;}
 double Satellite::A() const {return A_;}
+double Satellite::vx() const {return v_.vx();}
+double Satellite::vy() const {return v_.vy();}
+double Satellite::vz() const {return v_.vz();}
 
 //Setters
 void Satellite::set_m(double m) {m_=m;}

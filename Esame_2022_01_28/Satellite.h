@@ -19,16 +19,22 @@ class Satellite{
   ~Satellite() {}
 
   //Getters
-  virtual double m() const; 
-  virtual Vector3D r() const;
-  virtual Velocity v() const;
-  virtual double A() const;
+  double m() const; 
+  Vector3D r() const;
+  double x() const;
+  double y() const;
+  double z() const;
+  Velocity v() const;
+  double vx() const;
+  double vy() const;
+  double vz() const;
+  double A() const;
 
   //Setters
-  virtual void set_m(double m); 
-  virtual void set_r(Vector3D r); 
-  virtual void set_v (Velocity v);
-  virtual void set_A(double A);
+  void set_m(double m); 
+  void set_r(Vector3D r); 
+  void set_v (Velocity v);
+  void set_A(double A);
   
   //Utility
   double v2(double vx,double vy,double vz);

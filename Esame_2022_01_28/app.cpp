@@ -26,8 +26,8 @@ int main() {
 
   double r_0=250;
   double dt=0.01;
-  double tmin=0;
-  double tmax=1;
+  double tmin=0.;
+  double tmax=100.;
 
   Vector3D r(0,r_0,0);
   Velocity v(0,0,0);
@@ -38,19 +38,20 @@ int main() {
   Atmosphere atm(F,A_p);
   atm.print();
 
-  RungeKutta rungekutta(sat,atm,Earth,dt);
-  vector<Velocity> v_rk;
+  RungeKutta rk(sat,atm,Earth,dt);
 
-  v_rk=rungekutta.satellite(tmin,tmax);
+  vector<Satellite> sat_rk;
+
+  sat_rk=rk.simulation(tmin,tmax);
 
   double t=0;
   ofstream ofile1;
   string ofname1("./RK_results.csv");
   ofile1.open(ofname1);
-  ofile1 << "v_x" <<"\t"<< "v_y" <<"\t"<< "v_z" << "\t" <<"t" << endl;
-  for(vector<Velocity>::const_iterator it=v_rk.begin(); it != v_rk.end(); ++it) {
+  ofile1 << "x" << "\t" << "y" << "\t" << "z" << "\t" << "v_x" << "\t" << "v_y" << "\t" << "v_z" << "\t" << "t" << endl;
+  for(vector<Satellite>::const_iterator it=sat_rk.begin(); it != sat_rk.end(); ++it) {
     ofile1 << setprecision(5) << fixed;
-    ofile1 << it->vx() <<"\t" << it->vy() <<"\t" << it->vz() << "\t" << t << endl;
+    ofile1 << it->x() << "\t" << it->y() << "\t" << it->z() << "\t" << it->vx() << "\t" << it->vy() << "\t" << it->vz() << "\t" << t << endl;
     t+=dt;
   }
 
