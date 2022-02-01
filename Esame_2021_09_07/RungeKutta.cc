@@ -1,4 +1,4 @@
- #include "RungeKutta.h"
+#include "RungeKutta.h"
 
 #include <cmath>
 #include <vector>
@@ -19,7 +19,7 @@ vector<Velocity> RungeKutta::velocity(double tmin,double tmax) const{
   double k1y=0;
   double k2y=0;
 
-  for(double t=tmin;t<tmax;t=t+h_){
+  for(double t=tmin;t<tmax;t=t+dt_){
     k1x=-dt_*v_x*beta()/m();
     k2x=-dt_*(v_x+k1x*dt_/2)*beta()/m();
     v_x+=k2x;
