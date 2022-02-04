@@ -1,13 +1,20 @@
+#ifndef PARTICLE_HH
+#define PARTICLE_HH
+
 class Particle{
 
  public:
 
   //Contructors
-  Particle(); 
-  Particle(const Particle& particle); 
+  Particle(){
+    m_=0;
+    q_=0;
+    p_=0;
+  }
+  Particle(double m,double q,double p); 
 
   //Destructors
-  ~Particle();
+  ~Particle() {};
 
   //Getters
   double m() const;
@@ -15,23 +22,22 @@ class Particle{
   double p() const;
 
   //Setters
-  void Setm(double m);
-  void Setq(double q);
-  void Setp(double p);
+  void set_m(double m);
+  void set_q(double q);
+  void set_p(double p);
 
   //Member functions
+  double E();
   double beta();
   double gamma();
   double betagamma();
+
+  //Utility
+  void print();
 
  private:
   double m_;
   double q_;
   double p_;
-
-  Particle(double mass, double charge, double momentum) {
-    m_ = momentum;
-    q_ = charge;
-    p_ = mass;
-  };
 };
+#endif

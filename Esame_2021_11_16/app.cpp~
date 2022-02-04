@@ -1,0 +1,13 @@
+#include "Particle.h"
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  Particle p(4,4,10);
+  p.print();
+  return 0;
+
+}

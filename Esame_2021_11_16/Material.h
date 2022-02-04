@@ -1,14 +1,23 @@
+#ifndef MATERIAL_HH
+#define MATERIAL_HH
+
+#include "Particle.h"
+
 class Material{
 
  public:
 
   //Contructors
-  Material(); 
-  Material(double density, double mass, double charge, double ionisation); 
-  Material(const Material& material); 
+  Material(){
+    rho_=0;
+    A_=0;
+    Z_=0;
+    I_=0;
+  }
+  Material(double rho,double A,double Z,double I); 
 
   //Destructors
-  ~Material();
+  ~Material() {};
 
   //Getters
   double rho() const;
@@ -17,13 +26,16 @@ class Material{
   double I() const;
   
   //Setters
-  void Setrho(double rho);
-  void SetA(double A);
-  void SetZ(double Z);
-  void SetI(double I);
+  void set_rho(double rho);
+  void set_A(double A);
+  void set_Z(double Z);
+  void set_I(double I);
+
+  //Utility
+  void print();
 
   //Member functions
-  double dEdx();
+  double dEdx(Particle& particle);
 
  private:
   double rho_;
@@ -31,3 +43,4 @@ class Material{
   double Z_;
   double I_;
 };
+#endif
