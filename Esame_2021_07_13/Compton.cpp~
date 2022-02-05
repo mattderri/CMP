@@ -1,0 +1,30 @@
+#include <iostream>
+#include <time.h>
+
+#include "TRandom3.h"
+#include "TH1F.h"
+#include "TCanvas.h"
+#include "TFile.h"
+#include "TLorentzVector.h"
+#include "TMath.h"
+#include "TF1.h"
+
+#define m_e 511 //massa dell'elettrone [KeV]
+
+using namespace std;
+
+//double E_Compton(double Ei, double theta);
+
+int main(){
+
+  TString rootfname("./Compton_scattering.root");
+  TFile rfile(rootfname, "RECREATE");
+  if( !rfile.IsOpen() ) {
+    cout << "problems creating root file. existing... " << endl;
+    exit(-1);
+  }
+  cout << "storing output in root file " << rootfname << endl;
+
+  return 0;
+
+}
