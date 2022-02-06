@@ -18,10 +18,10 @@ int main(){
   TString rootfname("./Compton_scattering.root");
   TFile rfile(rootfname, "RECREATE");
   if( !rfile.IsOpen() ) {
-    cout << "problems creating root file. existing... " << endl;
+    cout << "Problems creating root file. existing... " << endl;
     exit(-1);
   }
-  cout << "storing output in root file " << rootfname << endl;
+  cout << "Storing output in root file " << rootfname << endl;
 
   TRandom* gen=new TRandom();
   gen->SetSeed(time(NULL));
