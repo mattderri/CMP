@@ -63,6 +63,9 @@ void Material::loss(Particle& particle, double x){
   double p=0.;
   double loss_mis=0.;
 
+  TRandom* gen=new TRandom();
+  gen->SetSeed(time(NULL));
+
   if(particle.E()>Ec_){  //Bremsstrahlung
 
     prob=exp(-x/X0_);
@@ -76,12 +79,15 @@ void Material::loss(Particle& particle, double x){
     
     loss=k*rho_*particle.q()*particle.q()*Z_*(log(4*m*m*particle.betagamma()*particle.betagamma()*particle.betagamma()*particle.betagamma()/(I_*I_))-particle.beta()*particle.beta()-delta_/2)/(particle.beta()*particle.beta()*A_);
 
-    loss_mis=TMath::Gaus(loss,loss*0.05);
+    loss_mis=gen->Gaus(loss,loss*0.05);
     particle.set_E(particle.E()-loss_mis*x);
   }
 
   if(particle.E()<particle.m()){
     particle.set_E(particle.m());
   }
+
+  
+  delete gen;
   
 }
