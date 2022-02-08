@@ -1,4 +1,3 @@
-//AO
 #include "Satellite.h"
 #include "Planet.h"
 #include "Atmosphere.h"
