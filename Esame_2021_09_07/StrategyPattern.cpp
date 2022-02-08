@@ -1,4 +1,3 @@
-//AO
 #include "Velocity.h"
 #include "Analytical.h"
 #include "RungeKutta.h"
