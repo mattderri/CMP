@@ -1,4 +1,3 @@
-//AO
 #include "Particle.h"
 #include "Material.h"
 
