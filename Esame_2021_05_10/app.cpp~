@@ -1,0 +1,23 @@
+#include "Particle.h"
+#include "Material.h"
+
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+
+  Particle electron(0.511,1,10);
+  Material Pb(11.35,207,82,823,0.56,7.4,0.6);
+  cout << "ELETTRONE" << endl;
+  electron.print();
+  cout << "PIOMBO" << endl;
+  Pb.print();
+
+  return 0;
+
+}
