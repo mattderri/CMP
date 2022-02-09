@@ -1,0 +1,41 @@
+#include <iostream>
+
+#include "TRandom3.h"
+#include "TH1F.h"
+#include "TCanvas.h"
+#include "TFile.h"
+#include "TLorentzVector.h"
+#include "TMath.h"
+#include "THStack.h"
+
+#include "Vector3D.h"
+
+using namespace std;
+
+int main() {
+
+  TFstring rootfname("./Output.root");
+  TFile rfile(rootfname,"RECRETE");
+  if(!rfile.IsOpen()){
+    cout << "Problemi nel creare il file" << endl;
+    exit(-1);
+  }
+  cout << "Storing output in root file " << rootfname << endl;
+
+  TRandom* gen=new TRandom();
+  gen->SetSeed(0);
+
+  TLorentzVector p4_B;
+  double m_B=5279; //[MeV]
+  double p_B=2000; //[MeV]
+  p4_B.SetPxPyPzE(p_B,0,0,sqrt(p_B*p_B+m_B*m_B));
+
+  cout << "Quadrimomento del mesone B nel sistema di riferimento del laboratorio: " << endl;
+  p4_B.print();
+  cout << "Parametri del boost:" << endl;
+  cout << "Beta: " << p4_B.Beta() << endl;
+  cout << "Gamma: " << p4_B.Gamma() << endl;
+  cout << "BetaGamma: " << p4_B.Beta()*p4_B.Gamma() << endl;
+  
+  return 0;
+}
