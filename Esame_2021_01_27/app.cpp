@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <iomanip>
 
 #include "TRandom3.h"
 #include "TH1F.h"
@@ -49,6 +51,13 @@ int main() {
   TH1F hK("hk","Distribuzione del momento del mesone K nel LAB",200,0,5000);
   TH1F hs("hs","Massa invariante",200,0,6000);
 
+  ofstream ofile1;
+  string ofname1("./dati.dat");
+  ofile1.open(ofname1);
+  ofile1 << "x_B" << "\t" << "x_D" << "\t" << "delta" << "\t" << "delta_mis" << endl;
+  ofile1 << setprecision(3) << fixed;
+    
+  
   //Quadrimomento del pione, del mesone D e del kaone
   TLorentzVector p4_pi,p4_D,p4_K; 
   int i;
@@ -107,6 +116,8 @@ int main() {
     delta_mis=xD_mis-xB_mis;
     hDelta.Fill(delta);
     hDelta_mis.Fill(delta_mis);
+
+    ofile1 << xB << "\t" << xD << "\t" << delta << "\t" << delta_mis << endl;
 
     //Genero tre direzioni casuali
     gen->Sphere(x,y,z,1);
