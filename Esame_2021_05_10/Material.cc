@@ -22,6 +22,7 @@ Material::Material(double rho,double A,double Z,double I,double X0,double Ec,dou
   X0_=X0;      //Lunghezza di radiazione
   Ec_=Ec;      //Energia critica
   delta_=delta; //Delta
+  srand48(time(NULL));
 }
 
 //Getters
@@ -54,40 +55,31 @@ void Material::print(){
 }
 
 //Member Functions
-void Material::loss(Particle& particle, double x){
+void Material::loss(Particle& particle,double E0,double x,TRandom* gen,double dx){
   
   double k=0.3;             //[MeV/g*cm^2]
   double m=511000;          //Massa dell'elettrone [eV]
-  double loss=0.;
-  double prob=0.;
-  double p=0.;
-  double loss_mis=0.;
-
-  TRandom* gen=new TRandom();
-  gen->SetSeed(time(NULL));
+  double loss,loss_mis;
+  double prob,p;
 
   if(particle.E()>Ec_){  //Bremsstrahlung
 
     prob=exp(-x/X0_);
-    p=((double) rand()/(RAND_MAX));
+    p=((double) lrand48()/(RAND_MAX));
     if(p>prob){
-      particle.set_E(particle.E()*exp(-x/X0_));
+      particle.set_E(E0*exp(-x/X0_));
     }
   }
 
   else{ //Bethe-Bloch
-    
-    loss=k*rho_*particle.q()*particle.q()*Z_*(log(4*m*m*particle.betagamma()*particle.betagamma()*particle.betagamma()*particle.betagamma()/(I_*I_))-particle.beta()*particle.beta()-delta_/2)/(particle.beta()*particle.beta()*A_);
+    loss=k*rho_*Z_*(log(4*m*m*particle.betagamma()*particle.betagamma()*particle.betagamma()*particle.betagamma()/(I_*I_))-particle.beta()*particle.beta()-delta_/2)/(2*particle.beta()*particle.beta()*A_);
 
     loss_mis=gen->Gaus(loss,loss*0.05);
-    particle.set_E(particle.E()-loss_mis*x);
+    particle.set_E(particle.E()-loss_mis*dx);
   }
 
   if(particle.E()<particle.m()){
     particle.set_E(particle.m());
-  }
-
-  
-  delete gen;
+    }
   
 }

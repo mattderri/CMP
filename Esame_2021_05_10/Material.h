@@ -2,6 +2,13 @@
 #define MATERIAL_HH
 
 #include "Particle.h"
+#include "TRandom3.h"
+#include "TH1F.h"
+#include "TCanvas.h"
+#include "TFile.h"
+#include "TLorentzVector.h"
+#include "TMath.h"
+#include "TF1.h"
 
 class Material{
 
@@ -16,6 +23,7 @@ class Material{
     X0_=0;
     Ec_=0;
     delta_=0;
+    srand(time(NULL));
   }
   Material(double rho,double A,double Z,double I,double X0,double Ec,double delta); 
 
@@ -44,7 +52,7 @@ class Material{
   void print();
 
   //Member functions
-  void loss(Particle& particle,double x);
+  void loss(Particle& particle,double E0,double x,TRandom* gen,double dx);
 
  private:
   double rho_;
