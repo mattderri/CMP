@@ -27,21 +27,18 @@ int main() {
   }
   cout << "Storing output in root file " << rootfname << endl;
 
-  TH1F hxmax10("hxmax10","Penetrazione massima per elettroni con energia 10MeV",200,0.5,1);
-  TH1F hxmax1("hxmax1","Penetrazione massima per elettroni con energia 1GeV",200,3,3.5);
-  TH1F hxmax100("hxmax100","Penetrazione massima per elettroni con energia 100GeV",200,5.5,6);
-
   TRandom* gen=new TRandom();
-  gen->SetSeed(time(NULL));
+  gen->SetSeed(time(0));
 
   Material Pb(11.35,207.,82.,823.,0.56,7.4,0.6);
 
-  double step=0.01; //[cm]
-  double x10,x1,x100;
+  double step=0.001; //[cm]
+  double x10,x1,x100,x102;
   double xmean10,xmean1,xmean100;
   double xrms10,xrms1,xrms100;
 
   int i;
+  double N=1e4;
 
   ofstream ofile10;
   string ofname10("./10MeV.dat");
@@ -61,13 +58,12 @@ int main() {
 
     ofile10 << x10 << endl;
 
-    hxmax10.Fill(x10);
-    xmean10+=x10/1e4;
+    xmean10+=x10/N;
     xrms10+=x10*x10;
 
   }
 
-  xrms10=sqrt(xrms10/1e4);
+  xrms10=sqrt(xrms10/N);
 
   ofstream ofile1;
   string ofname1("./1GeV.dat");
@@ -87,13 +83,12 @@ int main() {
 
     ofile1 << x1 << endl;
 
-    hxmax1.Fill(x1);
-    xmean1+=x1/1e4;
+    xmean1+=x1/N;
     xrms1+=x1*x1;
 
   }
 
-  xrms1=sqrt(xrms1/1e4);
+  xrms1=sqrt(xrms1/N);
   
   ofstream ofile100;
   string ofname100("./100GeV.dat");
@@ -108,38 +103,17 @@ int main() {
   
     while(electron100.E()>electron100.m()){
       Pb.loss(electron100,1e5,x100,gen,step);
-      x100+=step;;
+      x100+=step;
     }
 
     ofile100 << x100 << endl;
-
-    hxmax100.Fill(x100);
-    xmean100+=x100/1e4;
+    
+    xmean100+=x100/N;
     xrms100+=x100*x100;
 
   }
 
-  xrms100=sqrt(xrms100/1e4);
-
-  TCanvas canv("canv","canvas for plotting",1280,1024);
-  hxmax10.GetXaxis()->SetTitle("Penetrazione massima [cm] ");
-  hxmax10.GetYaxis()->SetTitle("Eventi");
-  hxmax10.Draw();
-  canv.SaveAs("./xmax-10mev.pdf");
-
-  hxmax1.GetXaxis()->SetTitle("Penetrazione massima [cm] ");
-  hxmax1.GetYaxis()->SetTitle("Eventi");
-  hxmax1.Draw();
-  canv.SaveAs("./xmax-1gev.pdf");
-  
-  hxmax100.GetXaxis()->SetTitle("Penetrazione massima [cm] ");
-  hxmax100.GetYaxis()->SetTitle("Eventi");
-  hxmax100.Draw();
-  canv.SaveAs("./xmax-100gev.pdf");
-
-  hxmax10.Write();
-  hxmax1.Write();
-  hxmax100.Write();
+  xrms100=sqrt(xrms100/N);
 
   rfile.Close();
 

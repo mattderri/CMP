@@ -22,8 +22,9 @@ Material::Material(double rho,double A,double Z,double I,double X0,double Ec,dou
   X0_=X0;      //Lunghezza di radiazione
   Ec_=Ec;      //Energia critica
   delta_=delta; //Delta
-  srand48(time(NULL));
+  srand48(time(0));
 }
+
 
 //Getters
 double Material::rho() const { return rho_; }
@@ -67,7 +68,7 @@ void Material::loss(Particle& particle,double E0,double x,TRandom* gen,double dx
     prob=exp(-x/X0_);
     p=((double) lrand48()/(RAND_MAX));
     if(p>prob){
-      particle.set_E(E0*exp(-x/X0_));
+      particle.set_E(E0*prob);
     }
   }
 
