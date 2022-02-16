@@ -21,7 +21,7 @@ class Capacitor{
   void set_C(double C);
 
   //Utility
-  void print();
+  void print() const;
 
   //Overload operators
   Capacitor operator+(const Capacitor& rhs) const;

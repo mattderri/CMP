@@ -45,7 +45,7 @@ int main() {
   int i;
   int N=int(1e3);
 
-  Capacitor capacitor1(0.);
+  Capacitor capacitor1(1.);
   
   for(i=0;i<N;i++){
     //Genero casualmente C1 tra (0 e 99)+1

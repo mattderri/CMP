@@ -1,12 +1,25 @@
 #include "Capacitor.h"
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
 //Constructors
 Capacitor::Capacitor(double capacitance){
+ 
+  while(capacitance<0){
+    cout << "È stato definito un condensatore con capacità negativa! Inserire una capacità postiva:" << endl;
+    cin >> capacitance;
+    }
+
+  /*if(capacitance<0){
+    cout << "È stato definito un condensatore con una capacità negativa! Interrompo l'esecuzione del programma" << endl;
+    exit(-1);
+    }*/
+
   C_=capacitance; //[pF]
+
 }
 
 //Getters
@@ -16,7 +29,7 @@ double Capacitor::C() const { return C_; }
 void Capacitor::set_C(double C) {C_=C; }
 
 //Member functions
-void Capacitor::print(){
+void Capacitor::print() const {
   cout << "Il condensatore ha capacità " << C_  << "pF" << endl;
 }
 
