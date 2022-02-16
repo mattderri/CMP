@@ -44,11 +44,14 @@ int main() {
 
   int i;
   int N=int(1e3);
+
+  Capacitor capacitor1(0.);
   
   for(i=0;i<N;i++){
     //Genero casualmente C1 tra (0 e 99)+1
     C1=gen->Integer(100)+1;  
-    Capacitor capacitor1(C1);
+    //Capacitor capacitor1(C1);
+    capacitor1.set_C(C1);
     //Parallelo tra C1 e C2
     Capacitor c_eq_1=capacitor1.operator||(capacitor2);
     //Serie tra i due condensatori equivalenti
